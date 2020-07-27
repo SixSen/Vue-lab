@@ -20,7 +20,7 @@
 						//用户名配置
 						{
 							type: 'input',
-							modelkey: 'username',
+							modelKey: 'username',
 							label: '用户名:',
 							props: {
 								placeholder: '请输入用户名',
@@ -43,7 +43,7 @@
 						//密码配置
 						{
 							type: 'input',
-							modelkey: 'password',
+							modelKey: 'password',
 							label: '密码:',
 							props: {
 								placeholder: '请输入密码',
@@ -67,9 +67,30 @@
 			}
 		},
 		methods: {
-			submitHandler(e) {
+			async submitHandler(e) {
+				//e.preventDefault()
+				try{
+					const result = await this.$http.get('/api/login',{params:this.model})
+					if(result.data.code == '0'){
+						this.$store.commit('setToken',result.data.token),
+						//sessionStorage.setItem("token", result.data.token);
+						localStorage.setItem("token", result.data.token);
+						alert(result.data.message + '====success')
+						//sessionStorage.clear()
+						console.log(localStorage.getItem('token')+'---token---')
+						this.$router.replace({path:'/index'})
+						
+					}else{
+						alert(result.data.message+'====else')
+						
+					}
+					
+				}catch(err){
+					console.log(err+'======error======')
+				}
 
 			}
+			
 		}
 
 

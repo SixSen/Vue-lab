@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import 'amfe-flexible'
-
+import setaxios from './setaxios.js'
 Vue.config.productionTip = false
 //设置别名，$http设置为axios别名，为了实现类似Vue Resource的使用习惯
 Vue.prototype.$http=axios

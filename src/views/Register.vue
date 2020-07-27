@@ -12,15 +12,15 @@
 		data() {
 			return {
 				model: {
-					username: 'tim',
-					password: 'ddd'
+					username: '',
+					password: ''
 				},
 				schema: {
 					fields: [
 						//用户名配置
 						{
 							type: 'input',
-							modelkey: 'username',
+							modelKey: 'username',
 							label: '用户名:',
 							props: {
 								placeholder: '请输入用户名',
@@ -42,7 +42,7 @@
 						//密码配置
 						{
 							type: 'input',
-							modelkey: 'password',
+							modelKey: 'password',
 							label: '密码:',
 							props: {
 								placeholder: '请输入密码',
@@ -53,29 +53,28 @@
 							},
 							rules: {
 								require: true,
-							}
+							},
+							
 						},
-
-					],
-					fields:[
-						//注册
 						{
 							type: 'submit',
 							label: '注册'
 						}
-					]
+
+					],
+			
 				}
 			}
 		},
 		methods: {
 			submitHandler(e) {
 				e.preventDefault()
-				$http.get('/api/register', {
+				this.$http.get('/api/register', {
 					params: this.model
 				}).then(res => {
 					console.log(res.data.success)
 				}).catch(err => {
-					console.log(err)
+					console.log(err+'=====err=====')
 				})
 			}
 		}
